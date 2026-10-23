@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Баг-трекер: Создание дефекта</title>
+    <!-- Подключение внешних стилей -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="header-row">
+        <h1>Создать баг-репорт</h1>
+    </div>
+    <p class="subtitle">Заполните форму для передачи дефекта в команду разработки</p>
+
+    <form id="bugForm">
+        <div class="form-group">
+            <label for="summary">Заголовок (Summary) <span class="required">*</span></label>
+            <input type="text" id="summary" placeholder="[Где?] Что сломалось? При каких условиях?" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Краткое описание</label>
+            <textarea id="description" placeholder="Суть проблемы в 1-2 предложениях..."></textarea>
+        </div>
+
+        <div class="row">
+            <div class="col form-group">
+                <label for="severity">Критичность (Severity)</label>
+                <select id="severity">
+                    <option value="Blocker">Blocker (Блокирует работу)</option>
+                    <option value="Critical">Critical (Критический)</option>
+                    <option value="Major">Major (Значительный)</option>
+                    <option value="Minor">Minor (Незначительный)</option>
+                    <option value="Trivial">Trivial (Косметический)</option>
+                </select>
+            </div>
+            <div class="col form-group">
+                <label for="priority">Приоритет (Priority)</label>
+                <select id="priority">
+                    <option value="High">High (Высокий)</option>
+                    <option value="Medium" selected>Medium (Средний)</option>
+                    <option value="Low">Low (Низкий)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col form-group">
+                <label for="environment">Окружение (Environment)</label>
+                <input type="text" id="environment" placeholder="ОС, Браузер, Разрешение экрана">
+            </div>
+            <div class="col form-group">
+                <label for="assignee">Исполнитель (Assignee)</label>
+                <input type="text" id="assignee" placeholder="Кому назначить?">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="steps">Шаги воспроизведения (Steps to Reproduce) <span class="required">*</span></label>
+            <textarea id="steps" placeholder="1. Открыть страницу...&#10;2. Нажать на кнопку...&#10;3. Ввести данные..." required></textarea>
+        </div>
+
+        <div class="row">
+            <div class="col form-group">
+                <label for="expected">Ожидаемый результат</label>
+                <textarea id="expected" placeholder="Как должно работать по ТЗ..."></textarea>
+            </div>
+            <div class="col form-group">
+                <label for="actual">Фактический результат</label>
+                <textarea id="actual" placeholder="Что происходит на самом деле..."></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Вложения (Скриншоты, логи)</label>
+            <div class="file-upload-wrapper" onclick="simulateFileUpload()">
+                📎 Нажмите, чтобы прикрепить файлы (имитация)
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Отправить баг-репорт</button>
+    </form>
+</div>
+
+<!-- Модальное окно с результатом -->
+<div class="modal" id="resultModal">
+    <div class="modal-content">
+        <h2>✅ Баг-репорт успешно создан!</h2>
+        <p>Ниже представлен JSON-объект, который система отправляет на сервер (как в реальной Jira):</p>
+        <pre id="jsonOutput"></pre>
+        <button class="btn-close" onclick="closeModal()">Закрыть и создать новый</button>
+    </div>
+</div>
+
+<!-- Подключение внешнего скрипта -->
+<script src="script.js"></script>
+</body>
+</html>
